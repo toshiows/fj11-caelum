@@ -97,7 +97,27 @@ public abstract class Conta {
 		return this.saldo * 0.1;
 	}
 	
-	public String recuperaDadosParaImpressao() {
+	@Override
+	public String toString() {
+		return "[titular=" + titular + ", numero=" + numero
+				+ ", agencia=" + agencia + "]";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		
+		Conta outraConta = (Conta) obj; //fez o cast de outra conta para pegar o conta do obj
+										//igualou o endereco de memoria para comparar o objeto atual (recebido)
+										//com outra variavel com mesmo endereço de memoria
+										//COMPAROU OS MESMOS OBJETOS
+		
+		return this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia);
+	}
+	
+	/*public String recuperaDadosParaImpressao() {
 		return "Titular: " + titular
 			+ "\nNumero: " + numero
 			+ "\nAgencia: " + agencia
@@ -105,6 +125,6 @@ public abstract class Conta {
 		//	+ "\nData de Abertura: " + dataAbertura.dia + "/" 
 			//+ dataAbertura.mes + "/" + dataAbertura.ano
 			+ "\nRendimentos: " + String.format("%.2f", calculaRendimento());
-	}
+	}*/
 
 }
