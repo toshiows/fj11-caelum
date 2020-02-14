@@ -1,5 +1,7 @@
 package br.com.caelum.contas.modelo;
 
+import br.com.caelum.contas.modelo.exceptions.SaldoInsuficienteException;
+
 /**
  * Classe responsavel por moldar as contas do banco
  * 
@@ -7,7 +9,7 @@ package br.com.caelum.contas.modelo;
  *
  */
 
-public class Conta {
+public abstract class Conta {
 	private String titular;
 	private int numero;
 	private String agencia;
@@ -15,16 +17,14 @@ public class Conta {
 	//private Data dataAbertura;
 
 	public Conta() {
-		System.out.println("Criando conta sem receber valor");
+		//System.out.println("Criando conta sem receber valor");
 	}
 
 	public Conta(String titular) {
 		this.titular = titular;
 	}
 	
-	public String getTipo() {
-		return "Conta";
-	}
+	public abstract String getTipo();
 
 	public Conta(String titular, int numero, double saldo) {
 		this.titular = titular;
@@ -68,15 +68,27 @@ public class Conta {
 		this.dataAbertura = dataAbertura;
 	}*/
 
-	public void sacar(double valor) {
+	public void sacar(double valor) throws SaldoInsuficienteException{
+		if(valor < 0) {
+			throw new IllegalArgumentException("Voce tentou sacar um valor negativo");
+		}
+		
+		if(valor > saldo) {
+			throw new SaldoInsuficienteException("Saldo insuficiente");
+		}
+		
 		this.saldo = saldo - valor;
 	}
 
 	public void depositar(double valor) {
+		if (valor < 0) {
+			throw new IllegalArgumentException("Voce tentou depositar um valor negativo");
+		}
+		
 		this.saldo += valor;
 	}
 	
-	public void transfere(double valor, Conta conta) {
+	public void transfere(double valor, Conta conta) throws SaldoInsuficienteException {
 		this.sacar(valor);
 		conta.depositar(valor);
 	}
