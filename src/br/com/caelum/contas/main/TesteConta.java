@@ -1,6 +1,13 @@
 package br.com.caelum.contas.main;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+
 import br.com.caelum.contas.modelo.Conta;
-import br.com.caelum.contas.modelo.Data;
+import br.com.caelum.contas.modelo.ContaCorrente;
 
 class TesteConta {
 	public static void main(String[] args) {
@@ -35,5 +42,64 @@ class TesteConta {
 
 		System.out.println(c3.recuperaDadosParaImpressao());
 		*/
+		
+		Conta [] contas = new Conta[10];
+		double soma = 0.0;
+		
+		for(int i = 0 ; i < contas.length; i ++) {
+			Conta conta = new ContaCorrente();
+			conta.depositar(i * 100.0);
+			contas[i] = conta;
+			soma += contas[i].getSaldo();
+		}
+		//System.out.println(contas[9].getSaldo());
+		double media = soma / contas.length;
+		System.out.println(media);
+		
+		System.out.println("-------------------------");
+		
+		String frase = "Socorram-me, subi no ônibus em Marrocos";
+		String [] palavras = frase.split(" ");
+		System.out.println(palavras.length);
+		
+		for(int i= palavras.length -1 ; i >= 0 ; i--) {
+			System.out.print(palavras[i] +" ");
+		}
+		
+		long t;
+        t = Calendar.getInstance().getTimeInMillis();
+        System.out.println("Tempo : " + (Calendar.getInstance().getTimeInMillis() - t));
+        
+        System.out.println("---------------------------------------");
+        
+        
+        List<String> lista = new ArrayList<>();
+        lista.add("Sergio");
+        lista.add("Paulo");
+        lista.add("Ana");
+        lista.add("Guilherme");
+        System.out.println(lista);
+        Collections.sort(lista);
+        System.out.println(lista);
+        
+        System.out.println("---------------------------------------");
+        
+        System.out.println("Iniciando...");
+        Collection<Integer> teste = new HashSet<>();
+        long inicio = System.currentTimeMillis();
+        
+        int total = 30000;
+        
+        for(int i = 0; i < total; i++) {
+        	teste.add(i);
+        }
+        
+        for(int i = 0; i < total; i++) {
+        	teste.contains(i);
+        }
+        
+        long fim = System.currentTimeMillis();
+        long tempo = fim - inicio;
+        System.out.println("Tempo gasto: " + tempo);
 	}
 }

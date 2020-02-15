@@ -9,11 +9,11 @@ import br.com.caelum.contas.modelo.exceptions.SaldoInsuficienteException;
  *
  */
 
-public abstract class Conta {
+public abstract class Conta implements Comparable<Conta>{
 	private String titular;
 	private int numero;
 	private String agencia;
-	private double saldo;
+	protected double saldo;
 	//private Data dataAbertura;
 
 	public Conta() {
@@ -116,6 +116,14 @@ public abstract class Conta {
 		
 		return this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia);
 	}
+	
+	@Override
+	public int compareTo(Conta outraConta) {
+		return this.titular.compareTo(outraConta.titular);
+	}
+
+
+	
 	
 	/*public String recuperaDadosParaImpressao() {
 		return "Titular: " + titular

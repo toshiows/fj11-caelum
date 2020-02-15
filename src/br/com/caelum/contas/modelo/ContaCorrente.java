@@ -25,4 +25,15 @@ public class ContaCorrente extends Conta implements Tributavel{
 		// TODO Auto-generated method stub
 		return this.getSaldo() * 0.01;
 	}
+
+	/*@Override
+	public int compareTo(ContaCorrente outra) {
+		if(this.saldo < outra.saldo) {
+			return -1;
+		}
+		if(this.saldo > outra.saldo) {
+			return 1;
+		}
+		return 0;
+	}*/
 }
